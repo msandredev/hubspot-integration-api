@@ -2,6 +2,11 @@ spring:
   application:
     name: hubspot-integration-api
 
+server:
+  error:
+    whitelabel:
+      enabled: false
+
 hubspot:
   client-id: ${CLIENT_ID}
   client-secret: ${CLIENT_SECRET}
@@ -15,3 +20,4 @@ logging:
   level:
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
+    org.springframework.web.servlet.DispatcherServlet: ERROR
