@@ -18,6 +18,7 @@ public class HubSpotAuthService {
 
     private final HubSpotAuthClient hubSpotAuthClient;
     private final HubSpotProperties hubSpotProperties;
+    private final TokenStorageService tokenStorageService;
 
     public AuthorizationUrlResponse getAuthorizationUrl() {
         String scopesString = String.join(" ", hubSpotProperties.getScopes());
@@ -34,12 +35,17 @@ public class HubSpotAuthService {
 
     public TokenResponse handleCallback(String code) {
         log.info("Trocando code por token: code={}, clientId={}, redirectUri={}", code, hubSpotProperties.getClientId(), hubSpotProperties.getRedirectUri());
-        return hubSpotAuthClient.exchangeCodeForToken(
+        TokenResponse authorizationCode = hubSpotAuthClient.exchangeCodeForToken(
                 "authorization_code",
                 hubSpotProperties.getClientId(),
                 hubSpotProperties.getClientSecret(),
                 hubSpotProperties.getRedirectUri(),
                 code
         );
+        log.info("Token recebido: {}", authorizationCode);
+        tokenStorageService.storeTokens(authorizationCode);
+        log.info("Token armazenado com sucesso.");
+
+        return authorizationCode;
     }
 }

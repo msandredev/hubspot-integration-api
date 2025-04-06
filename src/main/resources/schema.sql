@@ -1,0 +1,8 @@
+CREATE TABLE hubspot_tokens (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    access_token VARCHAR(255) NOT NULL,
+    refresh_token VARCHAR(255) NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

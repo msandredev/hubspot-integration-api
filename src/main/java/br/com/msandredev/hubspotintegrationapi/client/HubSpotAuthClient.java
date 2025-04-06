@@ -17,4 +17,12 @@ public interface HubSpotAuthClient {
             @RequestParam("redirect_uri") String redirectUri,
             @RequestParam("code") String code
     );
+
+    @PostMapping(consumes = "application/x-www-form-urlencoded")
+    TokenResponse refreshToken(
+            @RequestParam("grant_type") String grantType,
+            @RequestParam("refresh_token") String refreshToken,
+            @RequestParam("client_id") String clientId,
+            @RequestParam("client_secret") String clientSecret
+    );
 }
