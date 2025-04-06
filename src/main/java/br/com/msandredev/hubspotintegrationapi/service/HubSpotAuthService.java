@@ -44,7 +44,6 @@ public class HubSpotAuthService {
         );
         log.info("Token recebido: {}", authorizationCode);
         tokenStorageService.storeTokens(authorizationCode);
-        log.info("Token armazenado com sucesso.");
 
         return authorizationCode;
     }
