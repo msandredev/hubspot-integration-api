@@ -1,10 +1,10 @@
-package br.com.msandredev.hubspot_integration_api;
+package br.com.msandredev.hubspotintegrationapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HubspotIntegrationApiApplicationTests {
+class AppTests {
 
 	@Test
 	void contextLoads() {

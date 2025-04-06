@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: hubspot-integration-api
+
+hubspot:
+  client-id: ${CLIENT_ID}
+  client-secret: ${CLIENT_SECRET}
+  redirect-uri: ${REDIRECT_URL}/api/hubspot/callback
+  auth-url: ${AUTH_URL}
+  token-url: ${TOKEN_URL}
+  authorization-grant-type: authorization_code
+  scopes: crm.objects.contacts.read crm.objects.contacts.write crm.schemas.contacts.read crm.schemas.contacts.write
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
