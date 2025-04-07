@@ -3,7 +3,7 @@ package br.com.msandredev.hubspotintegrationapi.application.controller;
 import br.com.msandredev.hubspotintegrationapi.application.dto.request.HubSpotContactRequest;
 import br.com.msandredev.hubspotintegrationapi.application.dto.exceptions.ErrorResponse;
 import br.com.msandredev.hubspotintegrationapi.domain.exceptions.TokenNotAvailableException;
-import br.com.msandredev.hubspotintegrationapi.application.service.HubSpotCrmService;
+import br.com.msandredev.hubspotintegrationapi.application.service.HubSpotCrmContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/hubspot/contacts")
 @RequiredArgsConstructor
-public class HubSpotContactController {
+public class HubSpotCrmContactController {
 
-    private final HubSpotCrmService crmService;
+    private final HubSpotCrmContactService crmService;
 
     @PostMapping
     public ResponseEntity<?> createContact(@Valid @RequestBody HubSpotContactRequest request) {

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class HubSpotCrmService {
+public class HubSpotCrmContactService {
 
     private final HubSpotCrmClient crmClient;
     private final TokenStorageService tokenStorage;
