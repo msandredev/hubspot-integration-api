@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Configuration
 @ConfigurationProperties(prefix = "hubspot")
-public class HubSpotProperties {
+public class HubSpotAuthProperties {
     private String clientId;
     private String authUrl;
     private String redirectUri;

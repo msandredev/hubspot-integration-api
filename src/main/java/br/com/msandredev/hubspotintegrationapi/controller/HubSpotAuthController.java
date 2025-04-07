@@ -1,9 +1,12 @@
 package br.com.msandredev.hubspotintegrationapi.controller;
 
-import br.com.msandredev.hubspotintegrationapi.dto.AuthorizationUrlResponse;
-import br.com.msandredev.hubspotintegrationapi.dto.TokenResponse;
+import br.com.msandredev.hubspotintegrationapi.dto.auth.AuthorizationUrlResponse;
+import br.com.msandredev.hubspotintegrationapi.dto.auth.TokenResponse;
+import br.com.msandredev.hubspotintegrationapi.dto.exceptions.ErrorResponse;
+import br.com.msandredev.hubspotintegrationapi.exceptions.HubSpotApiException;
 import br.com.msandredev.hubspotintegrationapi.service.HubSpotAuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +26,16 @@ public class HubSpotAuthController {
     }
 
     @GetMapping("/callback")
-    public ResponseEntity<TokenResponse> handleCallback(@RequestParam String code) {
-        return ResponseEntity.ok(hubSpotAuthService.handleCallback(code));
+    public ResponseEntity<?> handleCallback(@RequestParam String code) {
+        try {
+            TokenResponse response = hubSpotAuthService.handleCallback(code);
+            return ResponseEntity.ok(response);
+        } catch (HubSpotApiException e) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                    .body(new ErrorResponse("HUBSPOT_ERROR", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body(new ErrorResponse("INTERNAL_ERROR", "Erro no processamento interno."));
+        }
     }
 }

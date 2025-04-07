@@ -1,14 +1,14 @@
 package br.com.msandredev.hubspotintegrationapi.service;
 
 import br.com.msandredev.hubspotintegrationapi.client.HubSpotAuthClient;
-import br.com.msandredev.hubspotintegrationapi.config.HubSpotProperties;
-import br.com.msandredev.hubspotintegrationapi.dto.TokenResponse;
+import br.com.msandredev.hubspotintegrationapi.config.HubSpotAuthProperties;
+import br.com.msandredev.hubspotintegrationapi.dto.auth.TokenResponse;
+import feign.FeignException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Optional;
 
 @Slf4j
@@ -18,34 +18,29 @@ public class AuthTokenService {
 
     private final HubSpotAuthClient authClient;
     private final TokenStorageService tokenStorage;
-    private final HubSpotProperties hubSpotProperties;
+    private final HubSpotAuthProperties hubSpotAuthProperties;
 
     @Transactional
     public void refreshAccessToken() {
-        Optional<String> validToken = tokenStorage.getValidAccessToken();
-
-        if (validToken.isPresent()) {
-            log.info("Token válido encontrado no banco. Não é necessário gerar um novo.");
-            return;
-        }
-
         Optional<String> refreshToken = tokenStorage.getRefreshToken();
 
         if (refreshToken.isEmpty()) {
-            log.warn("Nenhum refresh_token encontrado. É necessário autenticar novamente via OAuth.");
+            log.warn("Nenhum refresh_token disponível. Requer nova autenticação via OAuth.");
             return;
         }
 
-        log.info("Gerando novo token via refresh_token...");
-        TokenResponse newToken = authClient.refreshToken(
-                "refresh_token",
-                refreshToken.get(),
-                hubSpotProperties.getClientId(),
-                hubSpotProperties.getClientSecret()
-        );
+        try {
+            TokenResponse newToken = authClient.refreshToken(
+                    "refresh_token",
+                    refreshToken.get(),
+                    hubSpotAuthProperties.getClientId(),
+                    hubSpotAuthProperties.getClientSecret()
+            );
 
-        tokenStorage.storeTokens(newToken);
-        log.info("Novo token gerado e salvo no banco. Expira em: {}",
-                Instant.now().plusSeconds(newToken.expiresIn()));
+            tokenStorage.storeTokens(newToken);
+
+        } catch (FeignException e) {
+            log.error("Falha ao renovar token: {}", e.contentUTF8());
+        }
     }
 }

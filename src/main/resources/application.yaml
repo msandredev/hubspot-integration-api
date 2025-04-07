@@ -31,6 +31,9 @@ hubspot:
   token-url: ${TOKEN_URL}
   authorization-grant-type: authorization_code
   scopes: crm.objects.contacts.read crm.objects.contacts.write crm.schemas.contacts.read crm.schemas.contacts.write
+  api:
+    base-url: ${BASE_URL}
+    create-contact: /crm/v3/objects/contacts
 
 logging:
   level:
@@ -43,3 +46,11 @@ logging:
 security:
   ignored: /h2-console/**
   permit-all: /**
+
+resilience4j:
+  ratelimiter:
+    instances:
+      hubspot-rate-limit:
+        limit-for-period: 100
+        limit-refresh-period: 60s
+        timeout-duration: 0

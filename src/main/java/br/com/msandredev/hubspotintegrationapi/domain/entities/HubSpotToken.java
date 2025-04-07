@@ -1,4 +1,4 @@
-package br.com.msandredev.hubspotintegrationapi.model;
+package br.com.msandredev.hubspotintegrationapi.domain.entities;
 
 import jakarta.persistence.*;
 

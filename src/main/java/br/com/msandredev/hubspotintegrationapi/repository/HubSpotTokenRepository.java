@@ -1,6 +1,6 @@
 package br.com.msandredev.hubspotintegrationapi.repository;
 
-import br.com.msandredev.hubspotintegrationapi.model.HubSpotToken;
+import br.com.msandredev.hubspotintegrationapi.domain.entities.HubSpotToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

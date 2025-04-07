@@ -1,4 +1,4 @@
-package br.com.msandredev.hubspotintegrationapi.dto;
+package br.com.msandredev.hubspotintegrationapi.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
