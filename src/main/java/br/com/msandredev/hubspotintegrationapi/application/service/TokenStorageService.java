@@ -33,16 +33,11 @@ public class TokenStorageService {
     @Transactional
     public void storeTokens(TokenResponse tokenResponse) {
         try {
-            clearExistingTokens();
             saveNewToken(tokenResponse);
         } catch (Exception e) {
             log.error("Erro ao armazenar o token: {}", e.getMessage());
             HubSpotExceptionHandler.handleInternalException(e);
         }
-    }
-
-    private void clearExistingTokens() {
-        tokenRepository.deleteAllInBatch();
     }
 
     private void saveNewToken(TokenResponse tokenResponse) {
