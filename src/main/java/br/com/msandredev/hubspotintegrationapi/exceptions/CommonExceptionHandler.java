@@ -1,5 +1,7 @@
 package br.com.msandredev.hubspotintegrationapi.exceptions;
 
+import br.com.msandredev.hubspotintegrationapi.dto.exceptions.HubSpotErrorResponse;
+import feign.FeignException;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -76,5 +78,24 @@ public class CommonExceptionHandler {
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity.badRequest()
                 .body(new ErrorResponse("VALIDATION_ERROR", ex.getMessage()));
+    }
+
+    @ExceptionHandler(FeignException.Conflict.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public HubSpotErrorResponse handleHubSpotConflict(FeignException e) {
+        HubSpotErrorResponse error = HubSpotErrorResponse.fromFeignException(e);
+        log.warn("Conflito no HubSpot: {}", error.message());
+        return error;
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<HubSpotErrorResponse> handleHubSpotApiException(FeignException e) {
+        HubSpotErrorResponse error = HubSpotErrorResponse.fromFeignException(e);
+        HttpStatus status = HttpStatus.resolve(e.status());
+
+        log.error("Erro na API HubSpot ({}): {}", status, error.message());
+        return ResponseEntity
+                .status(status != null ? status : HttpStatus.BAD_GATEWAY)
+                .body(error);
     }
 }
