@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = "br.com.msandredev.hubspotintegrationapi.client")
+@EnableFeignClients(basePackages = "br.com.msandredev.hubspotintegrationapi.infra.client")
 public class App {
 
 	public static void main(String[] args) {
