@@ -26,7 +26,7 @@ server:
 hubspot:
   client-id: ${CLIENT_ID}
   client-secret: ${CLIENT_SECRET}
-  redirect-uri: ${REDIRECT_URL}/api/hubspot/callback
+  redirect-uri: ${REDIRECT_URL}/auth/callback
   auth-url: ${AUTH_URL}
   token-url: ${TOKEN_URL}
   authorization-grant-type: authorization_code
@@ -44,7 +44,7 @@ logging:
     org.springframework.web.servlet.DispatcherServlet: ERROR
 
 security:
-  ignored: /h2-console/**
+  ignored: /h2-console/**,/swagger-ui/**,/v3/api-docs/**,/v3/api-docs.yaml,/swagger-resources/**,/webjars/**
   permit-all: /**
 
 resilience4j:

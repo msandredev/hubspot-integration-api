@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/hubspot")
+@RequestMapping("/auth")
 public class HubSpotAuthController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class HubSpotAuthController {
     @Autowired
     private HubSpotAuthValidator hubSpotAuthValidator;
 
-    @GetMapping("/auth-url")
+    @GetMapping("/authorize")
     public ResponseEntity<AuthorizationUrlResponse> getAuthUrl() {
         return ResponseEntity.ok(hubSpotAuthService.getAuthorizationUrl());
     }
