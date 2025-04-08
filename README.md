@@ -4,6 +4,13 @@ Aplicação Spring Boot para integração com a plataforma HubSpot, oferecendo a
 
 ---
 
+## 🛠️ Pré-requisitos
+
+- [Java 17+](https://ngrok.com/download)
+- [Maven 3.8+](https://maven.apache.org/)
+- [Conta de desenvolvedor no HubSpot](https://developers.hubspot.com/)
+- [Ngrok](https://ngrok.com/download) (para testes locais)
+
 ## 📌 Visão Rápida (Quick Start)
 
 Siga esses passos para executar o projeto localmente:
@@ -45,38 +52,14 @@ mvn spring-boot:run
 - Autorize a aplicação no HubSpot.
 - O token será exibido após o redirecionamento.
 
-## 🛠️ Pré-requisitos
+5. **Documentação da API**
+   - [Swagger UI](http://localhost:8080/swagger-ui.html)
 
-- [Java 17+](https://ngrok.com/download)
-- [Maven 3.8+](https://maven.apache.org/)
-- [Conta de desenvolvedor no HubSpot](https://developers.hubspot.com/)
-- [Ngrok](https://ngrok.com/download) (para testes locais)
-
-## ⚙️ Configuração
-
-1. Variáveis de ambiente (adicione ao application.yml):
-```yaml
-hubspot:
-  client-id: ${HUBSPOT_CLIENT_ID}  # Obtenha no painel do HubSpot
-  client-secret: ${HUBSPOT_CLIENT_SECRET}
-  redirect-uri: ${HUBSPOT_REDIRECT_URI}  # Ex: https://1234.ngrok.io/auth/callback
-```
-2. Ngrok (para receber callbacks):
-
-```bash
-ngrok http 8080
-```
-
-## 🚀 Executando a Aplicação
-```bash
-mvn spring-boot:run
-```
-
-- Documentação da API: [Swagger UI](http://localhost:8080/swagger-ui.html)
-- Banco de dados H2: [H2 Console](http://localhost:8080/h2-console)
-    - JDBC URL: `jdbc:h2:mem:hubspotdb`
-    - User: `sa`
-    - Password: `(vazio)`
+6. **Banco de dados H2**: 
+   - [H2 Console](http://localhost:8080/h2-console)
+      - JDBC URL: `jdbc:h2:mem:hubspotdb`
+      - User: `sa`
+      - Password: `(vazio)`
       
 ## 🔄 Fluxo de Autenticação OAuth2
 
