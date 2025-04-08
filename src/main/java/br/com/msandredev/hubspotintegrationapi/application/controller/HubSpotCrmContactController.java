@@ -12,14 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/hubspot/contacts")
+@Tag(name = "HubSpot CRM Contact Controller", description = "Controller responsável por gerenciar contatos no CRM do HubSpot.")
 public class HubSpotCrmContactController {
 
     @Autowired
     private HubSpotCrmContactService crmService;
 
+    @Operation(
+        summary = "Criar contato no HubSpot",
+        description = "Cria um novo contato no CRM do HubSpot com base nos dados fornecidos."
+    )
     @PostMapping
     public ResponseEntity<?> createContact(@Valid @RequestBody HubSpotContactRequest request) {
         try {

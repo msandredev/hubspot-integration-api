@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "HubSpot Authentication Controller", description = "Controller responsável por gerenciar o fluxo de autenticação com o HubSpot.")
 public class HubSpotAuthController {
 
     @Autowired
@@ -25,11 +28,19 @@ public class HubSpotAuthController {
     @Autowired
     private HubSpotAuthValidator hubSpotAuthValidator;
 
+    @Operation(
+        summary = "Obter URL de autorização",
+        description = "Retorna a URL de autorização para iniciar o processo de autenticação com o HubSpot."
+    )
     @GetMapping("/authorize")
     public ResponseEntity<AuthorizationUrlResponse> getAuthUrl() {
         return ResponseEntity.ok(hubSpotAuthService.getAuthorizationUrl());
     }
 
+    @Operation(
+        summary = "Callback de autenticação",
+        description = "Processa o código de autorização retornado pelo HubSpot e obtém o token de acesso."
+    )
     @GetMapping("/callback")
     public ResponseEntity<?> handleCallback(@RequestParam String code) {
         try {
