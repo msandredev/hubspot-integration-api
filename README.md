@@ -51,8 +51,9 @@ mvn spring-boot:run
 
 1. Acesse a URL de autenticação: [Gerar URL](http://localhost:8080/auth/authorize)
 2. Faça login no HubSpot e autorize a aplicação.
-3. Após a autorização, você será redirecionado para o endpoint `/auth/callback` com o token de acesso.
-4. Use o token para fazer chamadas à API do HubSpot.
+3. Após a autorização, o token é salvo no banco de dados e válido por 30 minutos (configurado para 1 minuto para fins de teste).
+4. Você será redirecionado para o endpoint `/auth/callback` com o token de acesso. 
+5. O token que ainda estiver vigente será utilizado para fazer chamadas à API do HubSpot.
 
 ## 📚 Documentação e Ferramentas
 
