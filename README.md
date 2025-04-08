@@ -47,26 +47,29 @@ ngrok http 8080
 mvn spring-boot:run
 ```
 
-4. **Acesse o fluxo OAuth2**:
-- Abra `http://localhost:8080/auth` no navegador.
-- Autorize a aplicação no HubSpot.
-- O token será exibido após o redirecionamento.
-
-5. **Documentação da API**
-   - [Swagger UI](http://localhost:8080/swagger-ui.html)
-
-6. **Banco de dados H2**: 
-   - [H2 Console](http://localhost:8080/h2-console)
-      - JDBC URL: `jdbc:h2:mem:hubspotdb`
-      - User: `sa`
-      - Password: `(vazio)`
-      
 ## 🔄 Fluxo de Autenticação OAuth2
 
 1. Acesse a URL de autenticação: [Gerar URL](http://localhost:8080/auth/authorize)
 2. Faça login no HubSpot e autorize a aplicação.
 3. Após a autorização, você será redirecionado para o endpoint `/auth/callback` com o token de acesso.
 4. Use o token para fazer chamadas à API do HubSpot.
+
+## 📚 Documentação e Ferramentas
+
+### 🔍 Documentação da API
+Acesse a interface interativa do Swagger para explorar todos os endpoints:  
+→ [Swagger UI](http://localhost:8080/swagger-ui.html)
+
+### 🗃️ Banco de Dados H2 (Ambiente de Desenvolvimento)
+Console administrativo do H2 Database:  
+→ [H2 Console](http://localhost:8080/h2-console) - *(Disponível apenas em ambiente local durante a execução da aplicação - dados são apagados ao reiniciar a aplicação)*
+
+**Credenciais de acesso:**
+```properties
+JDBC URL: jdbc:h2:mem:hubspotdb
+Usuário:  sa
+Senha:    (deixe em branco)
+```
 
 ## 📡 Endpoints Principais
 
