@@ -24,8 +24,10 @@ Siga esses passos para executar o projeto localmente:
   ```
   - Via IntelliJ IDEA:
     - Vá em `Run` > `Edit Configurations...`
+    
     ![1 - Edit configurations.png](src/main/resources/img/1%20-%20Edit%20configurations.png)
     - Selecione a configuração do projeto e adicione as variáveis de ambiente.
+    
     ![2 - Edite as Environment Variables.png](src/main/resources/img/2%20-%20Edite%20as%20Environment%20Variables.png)
 
 2. **Inicie o Ngrok** (em um terminal separado):
