@@ -14,11 +14,24 @@ Siga esses passos para executar o projeto localmente:
      client-id: seu-client-id  # Obtenha em [HubSpot Developers](https://developers.hubspot.com/)
      redirect-uri: https://seu-ngrok.ngrok.io/auth/callback
    ```
+- Pode ser configurado diretamente no IntelliJ IDEA (caso esteja usando) ou no terminal:
+
+  - Via terminal:
+  ```bash
+  export HUBSPOT_CLIENT_ID=seu-client-id
+  export HUBSPOT_CLIENT_SECRET=seu-client-secret
+  export HUBSPOT_REDIRECT_URI=https://seu-ngrok.ngrok.io/auth/callback
+  ```
+  - Via IntelliJ IDEA:
+    - Vá em `Run` > `Edit Configurations...`
+    ![1 - Edit configurations.png](src/main/resources/img/1%20-%20Edit%20configurations.png)
+    - Selecione a configuração do projeto e adicione as variáveis de ambiente.
+    ![2 - Edite as Environment Variables.png](src/main/resources/img/2%20-%20Edite%20as%20Environment%20Variables.png)
 
 2. **Inicie o Ngrok** (em um terminal separado):
-   ```bash
-   ngrok http 8080
-   ```
+```bash
+ngrok http 8080
+```
 
 3. **Execute a aplicação**:
 ```bash
