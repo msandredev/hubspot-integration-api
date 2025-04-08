@@ -108,6 +108,7 @@ mvn spring-boot:run
 4. **Segurança**: Usar Snyk ou outra ferramenta para verificar vulnerabilidades das dependências.
 5. **Banco de Dados**: Usar Migrations do Liquibase para versionamento de banco de dados.
 6. **Gerar documentação com plugin do Maven**: Usar o plugin do Maven para gerar a documentação da API, evitando poluir as classes.
+7. **Testes**: Criar testes unitários e de integração para garantir a qualidade do código.
 
 ## ✅ Conclusão
 Esta aplicação fornece uma base sólida para integração com o HubSpot, utilizando boas práticas de desenvolvimento e arquitetura. As melhorias sugeridas visam aumentar a robustez, segurança e escalabilidade da aplicação.
