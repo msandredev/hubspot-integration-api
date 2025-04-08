@@ -98,4 +98,9 @@ public class CommonExceptionHandler {
                 .status(status != null ? status : HttpStatus.BAD_GATEWAY)
                 .body(error);
     }
+
+    @ExceptionHandler(WebhookValidationException.class)
+    public ResponseEntity<String> handleWebhookValidationException(WebhookValidationException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
 }

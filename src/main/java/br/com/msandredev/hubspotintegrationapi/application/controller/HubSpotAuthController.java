@@ -2,11 +2,11 @@ package br.com.msandredev.hubspotintegrationapi.application.controller;
 
 import br.com.msandredev.hubspotintegrationapi.application.dto.response.AuthorizationUrlResponse;
 import br.com.msandredev.hubspotintegrationapi.application.dto.response.TokenResponse;
-import br.com.msandredev.hubspotintegrationapi.domain.exceptions.HubSpotApiException;
 import br.com.msandredev.hubspotintegrationapi.application.service.HubSpotAuthService;
+import br.com.msandredev.hubspotintegrationapi.domain.exceptions.HubSpotApiException;
 import br.com.msandredev.hubspotintegrationapi.domain.exceptions.HubSpotExceptionHandler;
 import br.com.msandredev.hubspotintegrationapi.shared.validation.HubSpotAuthValidator;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +17,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hubspot")
-@RequiredArgsConstructor
 public class HubSpotAuthController {
 
-    private final HubSpotAuthService hubSpotAuthService;
-    private final HubSpotAuthValidator hubSpotAuthValidator;
+    @Autowired
+    private HubSpotAuthService hubSpotAuthService;
+
+    @Autowired
+    private HubSpotAuthValidator hubSpotAuthValidator;
 
     @GetMapping("/auth-url")
     public ResponseEntity<AuthorizationUrlResponse> getAuthUrl() {
